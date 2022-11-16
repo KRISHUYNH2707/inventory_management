@@ -1,0 +1,169 @@
+@import "./variable";
+
+@import "./mixins";
+
+@import "./base";
+
+
+.header {
+    background-color: $c1-100;
+    box-shadow: 0 2px 4px $c1-200;
+    position: fixed;
+    top: 0;
+    left:0;
+    width: 100%;
+
+    .container {
+        display: flex;
+        height: 70px;
+        justify-content: space-between;
+        align-items: center;
+
+        .logo {
+            // font-size: $text-xl;
+            // font-weight: $text-bold;
+            // color: $c1-500;
+            text-decoration: none;
+            @include Text($text-xl, $text-bold, $c1-500);
+            // logo không cần hover, tuy nhiên mixin text() cần 4 tham số nên 
+            // #hc nên là màu của chính logo để hover vào cũng không ai thấy
+        
+        }
+
+        .navbar {
+           a {
+            @include Text($text-sm, $text-semiBold, $c1-700, $c1-500);
+            text-decoration: none;
+            margin-left: 30px;
+            position: relative;
+
+            // & parent selector
+
+            &::after {
+                content: "";
+                width: 100%;
+                height: 2px;
+                background-color: $c1-500;
+                position: absolute;
+                bottom: -4px;
+                left: 0;
+                transform: scaleX(0);
+                transition: all 0.4s
+            }
+
+            &:hover::after {
+                transform: scaleX(1);
+
+            } 
+
+           } 
+        }
+    }
+}
+
+.banner {
+    padding-top: 100px;
+    background-image: url(../img/product-header-bg.jpg);
+    background-size: cover;
+    background-position: bottom;
+    background-repeat: no-repeat;
+    .container {
+        height: 100vh;
+        display: flex;
+        // justify-content: space-between;
+        // align-items: center;
+        .title, .img {
+            height: 100%;
+            width: 50%;
+        }
+
+        .img {
+            height: 100%;
+            img {
+                width: 100%;
+            };
+        }
+
+        .title {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+
+            h2 {
+                color: $c1-500
+            }
+
+            h3 {
+                color: $c1-700;
+            }
+
+            // .btn-infor, .btn-shop {
+            //     @include Button(15, 18px);
+            // }
+            .btn-infor {
+                @include Button(15, 18px, $c1-500);
+                border: 2px solid $c1-500;
+            }
+
+            .btn-shop {
+                @include Button(17, 18px, $c1-100);
+                background: linear-gradient(120deg, $c1-300, $c1-500)
+            }
+        }
+    }
+
+
+
+
+}
+
+.products {
+    padding: 80x 0px;
+    
+    h2.title {
+        font-size:40px;
+        font-weight: $text-bold;
+        color: $c1-700;
+        text-align:center;
+        padding: 50px 0;
+    }
+
+    .products__list {
+        .item {
+            @include BoxShadow(6);
+            border-radius: 8px;
+            padding: 40px;
+            img {
+                @include BoxShadow(2);
+                border-radius: 8px;
+            }
+
+            .desc {
+                margin-top: 20px;
+                display: flex;
+                justify-content: space-between;
+                .content {
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: space-between;
+                };
+
+                .price {
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: space-between;
+                };
+
+                .price {
+                    text-align: right;
+
+                    button {
+                        @include BoxShadow(2);
+                    }
+                }
+            }
+        }
+    }
+    
+}
+

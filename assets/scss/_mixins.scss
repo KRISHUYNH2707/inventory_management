@@ -1,0 +1,47 @@
+// mixins: text, input, button
+// $hc:$c có nghĩa là nếu không truyền tham số hc thì nó sẽ mặc định lấy #c
+// đây chính là default parameter của mixin
+@mixin Text($fs, $fw, $c, $hc:$c) {
+
+    font-size: $fs;
+    font-weight: $fw;
+    color: $c;
+
+    &:hover {
+        color: $hc;
+    }
+}
+
+@mixin Button($basePadding, $fs, $color) {
+    padding: $basePadding * 1px $basePadding * 3px;
+    font-size: $fs;
+    border-radius: 8px;
+    color: $color;
+    
+}
+
+@mixin BoxShadow($base) {
+    box-shadow: $base*1px $base*1px $base*2px $c1-200, -$base*1px -$base*1px $base*2px $c1-50;
+}
+
+@mixin Responsive($breakPoint){
+    @if $breakPoint == MD {
+        @media screen and (min-width:$MD) {
+            @content;
+        }
+            
+        }
+    
+        @else if ($breakPoint == LG) {
+            @media screen and (min-width: $LG) {
+                @content;
+            };
+                
+            }
+        @else if ($breakPoint == XL) {
+            @media screen and (min-width: $XL) {
+                @content;
+                
+            }
+        }
+    }

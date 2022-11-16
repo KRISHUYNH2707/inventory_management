@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- GOOGLE FONT -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <!-- FONT-AWESOME -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- TAILWIND -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.15/tailwind.min.css" integrity="sha512-braXHF1tCeb8MzPktmUHhrjZBSZknHvjmkUdkAbeqtIrWwCchhcpUeAf2Sq3yIq1Q1x5PlroafjceOUbIE3Q5g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- MAIN CSS -->
+    <link rel="stylesheet" href="../../css/style.css">
+
+    
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <a href="" class="logo">CyberPhone</a>
+            <nav class="navbar">
+                <a href="">Home</a>
+                <a href="">About</a>
+                <a href="">Shop</a>
+                <a href="">Blog</a>
+                <a href="">Contact</a>
+            </nav>
+        </div>
+    </header>
+
+    <section class="banner">
+        <div class="container flex-col md:flex-row">
+            <div class="title space-y-5 pl-10">
+                <h2 class="text-5xl font-bold">CyberPhone</h2>
+                <h3 class="text-xl font-medium">Best Smartphone of 2021!</h3>
+                <p>Cras tortor mi, lobortis quis ornare in, varius scelerisque urna. Vivamus imperdiet dolor nec odio convallis consequat.</p>
+
+                <div>
+                    <button class="btn-infor">More Info</button>
+                    <button class="btn-shop">Shop</button>
+                </div>
+            </div>
+            <div class="img">
+                <img src="../../assets/img/product-header2.png" alt="">
+            </div>
+
+        </div>
+    </section>
+
+    <section class="products">
+        <div class="container">
+            <h2 class="title text-2xl ">-Featured Products-</h2>
+            <select class="custom-select" id="productType">
+                <option selected>Select Type</option>
+                <option value="all">All</option>
+                <option value="iphone">Iphone</option>
+                <option value="samsung">Samsung</option>
+            </select>
+            <div class="products__list grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10" id="product_list">
+                <!-- start item here -->
+
+                <!-- end item -->
+            </div>
+
+        </div>
+    </section>
+    <script src="../models/product.js"></script>
+    <script src="../services/product.js"></script>
+    <script src="https://unpkg.com/axios@1.1.3/dist/axios.min.js"></script>
+    <script src="../controllers/index.js"></script>
+
+</body>
+</html>
