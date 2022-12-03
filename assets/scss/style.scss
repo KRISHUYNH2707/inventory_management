@@ -4,13 +4,12 @@
 
 @import "./base";
 
-
 .header {
     background-color: $c1-100;
     box-shadow: 0 2px 4px $c1-200;
     position: fixed;
     top: 0;
-    left:0;
+    left: 0;
     width: 100%;
 
     .container {
@@ -25,38 +24,51 @@
             // color: $c1-500;
             text-decoration: none;
             @include Text($text-xl, $text-bold, $c1-500);
-            // logo không cần hover, tuy nhiên mixin text() cần 4 tham số nên 
+            // logo không cần hover, tuy nhiên mixin text() cần 4 tham số nên
             // #hc nên là màu của chính logo để hover vào cũng không ai thấy
-        
         }
 
         .navbar {
-           a {
-            @include Text($text-sm, $text-semiBold, $c1-700, $c1-500);
-            text-decoration: none;
-            margin-left: 30px;
-            position: relative;
+            a {
+                @include Text($text-sm, $text-semiBold, $c1-700, $c1-500);
+                text-decoration: none;
+                margin-left: 30px;
+                position: relative;
 
-            // & parent selector
+                // & parent selector
 
-            &::after {
-                content: "";
-                width: 100%;
-                height: 2px;
-                background-color: $c1-500;
-                position: absolute;
-                bottom: -4px;
-                left: 0;
-                transform: scaleX(0);
-                transition: all 0.4s
+                &::after {
+                    content: "";
+                    width: 100%;
+                    height: 2px;
+                    background-color: $c1-500;
+                    position: absolute;
+                    bottom: -4px;
+                    left: 0;
+                    transform: scaleX(0);
+                    transition: all 0.4s;
+                }
+
+                &:hover::after {
+                    transform: scaleX(1);
+                }
             }
+        }
 
-            &:hover::after {
-                transform: scaleX(1);
-
-            } 
-
-           } 
+        .shoppingCart {
+            height: 70px;
+            width: 70px;
+            position: relative;
+        }
+        img {
+            width: 100%;
+            height: 50%;
+            padding: 10px;
+        }
+        p {
+            position: absolute;
+            left: 50%;
+            top: 27%;
         }
     }
 }
@@ -72,7 +84,8 @@
         display: flex;
         // justify-content: space-between;
         // align-items: center;
-        .title, .img {
+        .title,
+        .img {
             height: 100%;
             width: 50%;
         }
@@ -81,7 +94,7 @@
             height: 100%;
             img {
                 width: 100%;
-            };
+            }
         }
 
         .title {
@@ -90,7 +103,7 @@
             justify-content: center;
 
             h2 {
-                color: $c1-500
+                color: $c1-500;
             }
 
             h3 {
@@ -107,24 +120,20 @@
 
             .btn-shop {
                 @include Button(17, 18px, $c1-100);
-                background: linear-gradient(120deg, $c1-300, $c1-500)
+                background: linear-gradient(120deg, $c1-300, $c1-500);
             }
         }
     }
-
-
-
-
 }
 
 .products {
     padding: 80x 0px;
-    
+
     h2.title {
-        font-size:40px;
+        font-size: 40px;
         font-weight: $text-bold;
         color: $c1-700;
-        text-align:center;
+        text-align: center;
         padding: 50px 0;
     }
 
@@ -138,6 +147,14 @@
                 border-radius: 8px;
             }
 
+            .product_feature {
+                margin-top: 20px;
+
+                h3 {
+                    font-size: 15px;
+                }
+            }
+
             .desc {
                 margin-top: 20px;
                 display: flex;
@@ -146,24 +163,51 @@
                     display: flex;
                     flex-direction: column;
                     justify-content: space-between;
-                };
+                
+                }
 
                 .price {
                     display: flex;
                     flex-direction: column;
                     justify-content: space-between;
-                };
+                }
 
                 .price {
                     text-align: right;
 
                     button {
                         @include BoxShadow(2);
+                        padding: 10px 0px;
                     }
                 }
             }
         }
     }
-    
 }
 
+.cartModal {
+    display: none;
+}
+
+/* width */
+#scroll::-webkit-scrollbar {
+    width: 1px;
+}
+
+/* Track */
+#scroll::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+/* Handle */
+#scroll::-webkit-scrollbar-thumb {
+    background: rgb(133, 132, 132);
+}
+
+#chec-div {
+    display: none;
+}
+
+#thankyouMessage {
+    visibility: hidden;
+}
