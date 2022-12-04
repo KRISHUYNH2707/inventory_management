@@ -357,8 +357,11 @@ checkoutHandler = (bool) => {
 }
 
 checkoutHandler1 = (bool) => {
+    shoppingCart = []
+    renderTotalQty(shoppingCart)
     domById('chec-div').style.display = 'none'
     domById('thankyouMessage').style.visibility = 'visible';
+
 }
 
 clearShoppingCart = () => {
