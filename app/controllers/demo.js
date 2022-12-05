@@ -1,6 +1,12 @@
 // tạo productService
 var productService = new ProductService ();
 
+// rút gọn documnet.gêtlementID
+function domId (id) {// truyền vào ID
+    //return document....
+    return document.getElementById(id);
+};
+
 // tạo hàm lặp đi lặp lại
 function getProductList () {
     // var productList = [];==> ko dùng dc
@@ -12,7 +18,7 @@ function getProductList () {
     //do đã tách axios nên h sẽ gọi service, ko gọi trực tiếp nữa
     productService.getProduct().then(function (response) {//=> xoa promise.then lun, khi nào sd lại ms tạo biến thoi==> Gọi trực típ lun
        // lấy danh sách sp
-    //    console.log(response);
+       console.log(response);
     //xem chạy dòng nào trc
     // console.log("13");
     //    productList = response.data;// gán producLisst=respone.dâta : data là mảng ==> bị bất đồng bộ
@@ -43,7 +49,14 @@ function renderProductList (data) {// nhận tham số vô là data
           <td>${data[i].price}</td>
           <td>${data[i].img}</td>
           <td>${data[i].type}</td>
-          <td></td>
+          <td>
+          <button data-toggle="modal" 
+              data-target="#myModal" class = "btn btn-info" onclick = "openUpdateModal(${data[i].id})">SỬA</button>
+
+          <button 
+          onclick = "deleteProduct(${data[i].id})"
+          class = "btn btn-danger">XÓA</button>
+          </td>
        </tr>
       `
 // chuỗi mong muốn là những DÒNG => <tr></tr>  => có những dòng <td></td> bên trong
@@ -52,11 +65,59 @@ function renderProductList (data) {// nhận tham số vô là data
 //<td>Price</td>: mảng lấy ptu index.price
 //<td>image</td>: mảng lấy ptu index.image
 //<td>description</td>: mảng lấy ptu index.description
-//DOM đến ID để lấy đc bảng=> render nó vô
-   document.getElementById("tblDanhSachSP").innerHTML = content;
-    }
 
+ };
+    //DOM đến ID để lấy đc bảng=> render nó vô
+document.getElementById("tblDanhSachSP").innerHTML = content;
+};
+
+// Button XÓA
+function deleteProduct (id) {
+    productService.deleteProduct(id).then(function () {
+        alert("Xóa sản phẩm thành công");
+        getProductList();
+    })
+};
+
+// Button SỬA
+function openUpdateModal (id) {
+    document.querySelector(".modal-title").innerHTML = "Sửa Sản Phẩm";
+    document.querySelector(".modal-footer").innerHTML = 
+    `<button onclick = 'UpdateProduct(${id})' class = 'btn btn-primary'>SỬA</button>`;
+
+// hiển thị những nd khi ml click vào ô sửa
+   productService.getProductDetail(id).then(function(respone) {
+       // dom đến từng id, do bất đồng bộ nên sẽ chạy trong THEN
+       domId("TenSP").value = respone.data.name;
+       domId("GiaSP").value = respone.data.price;
+       domId("HinhSP").value = respone.data.img;
+       domId("loaiSP").value = respone.data.type;
+   });
 }
+
+// khi sửa thì lấy đc gtri ms của form input
+function UpdateProduct (id) { // cần có 1 id của thằng mk gọi
+// cách lấy DATA từ FORM
+  var name = domId("TenSP").value;
+  var price = domId("GiaSP").value;
+  var screen =  domId("screen 70");
+  var backCamera = domId(" Chính 64 MP & Phụ 12 MP, 5 MP, 5 MP");
+  var fontCamera = domId(" 32 MP");
+  var img = domId("HinhSP").value;
+  var desc = domId("Thiết kế đột phá, màn hình tuyệt đỉnh");
+  var type = domId("loaiSP").value;
+
+    var product = new Product (id, name, price, screen, backCamera, fontCamera, img, desc, type);//=> data
+
+// gọi function update bên product.service
+  productService.updateProduct(id, product).then(function (){
+    // sau khi sửa xong thì tự động đóng
+    document.querySelector(".close").click();
+    //update lại dsach luôn
+    alert("Sửa sản phẩm thành công");
+    getProductList();
+  });
+};
 
 // hàm chạy khi load lại Trang
 window.onload = function () {
@@ -66,7 +127,8 @@ window.onload = function () {
 
 
 // đổi tên model heading
-document.getElementById("btnThemSP").onclick = function () {
+domId("btnThemSP").onclick = function () { //==> dùng ngắn gọn hơn
+// document.getElementById("btnThemSP").onclick = function () {
     //thử xem nó có chạy ko
     // console.log(123123);
 
@@ -93,19 +155,29 @@ function addProduct() {
     // console.log(30);
 
 // dom đến id trên input để lấy value
-  var name = document.getElementById("TenSP").value;
-  var price = document.getElementById("GiaSP").value;
-  var img = document.getElementById("HinhSP").value;
-  var type = document.getElementById("loaiSP").value;
+  var id = domId("2");
+  var name = domId("TenSP").value;
+  var price = domId("GiaSP").value;
+  var screen =  domId("screen 70");
+  var backCamera = domId(" Chính 64 MP & Phụ 12 MP, 5 MP, 5 MP");
+  var fontCamera = domId(" 32 MP");
+  var img = domId("HinhSP").value;
+  var desc = domId("Thiết kế đột phá, màn hình tuyệt đỉnh");
+  var type = domId("loaiSP").value;
 
 
   // tạo 1 product để new từ lớp đối tượng là model
-    var product = new Product()
+    var product = new Product(id, name, price, screen, backCamera, fontCamera, img, desc, type);
 
 //   console.log(name, price, image, description);
   //log để bt đc cái nào là name, price, imge,...
-  console.log({name, price, img, type});
+  // console.log({name, price, img, type});
+
+  //gọi API, load lại trang lun
+  productService.addProduct (product).then(function () {
+    alert("Thêm sản phẩm thành công.");
+    getProductList();
+  });
+  // data ở đây chính là product new từ lớp đtg PRODUCT 
 };
-
-
 
